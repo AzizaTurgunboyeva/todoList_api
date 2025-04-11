@@ -20,23 +20,25 @@ export class TodoService {
     return this.todoModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Todo|null> {
+  async findOne(id: string): Promise<Todo | null> {
     return this.todoModel.findById(id).exec();
   }
+  async updateTaskCompletion(id: string): Promise<Todo | null> {
+    try {
+      const todo = await this.todoModel.findById(id).exec();
+      if (!todo) {
+        return null;
+      }
 
-  async updateTaskCompletion(id: string): Promise<Todo |null> {
-   
-    const todo = await this.todoModel.findById(id).exec();
+      todo.isCompleted = !todo.isCompleted;
 
-    if (todo) {
-      todo.isCompleted = true;
+      return await todo.save();
+    } catch (error) {
+      console.log(error.message);
 
-      return todo.save();
+      throw error;
     }
-
-    return null;
   }
-
 
   async remove(id: string): Promise<Todo | null> {
     return this.todoModel.findByIdAndDelete(id).exec();
