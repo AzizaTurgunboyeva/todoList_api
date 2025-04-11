@@ -31,7 +31,7 @@ export class TodoController {
     return this.todoService.findOne(id);
   }
 
-  @Patch(":id")
+  @Patch("/complete/:id")
   async completeTodo(@Param("id") id: string): Promise<Todo | null> {
     return this.todoService.updateTaskCompletion(id);
   }
