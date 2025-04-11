@@ -32,8 +32,15 @@ export class TodoController {
   }
 
   @Patch(":id")
-  async completeTodo(@Param("id") id: string): Promise<Todo|null> {
+  async completeTodo(@Param("id") id: string): Promise<Todo | null> {
     return this.todoService.updateTaskCompletion(id);
+  }
+  @Patch(":id")
+  async updateTodo(
+    @Param("id") id: string,
+    @Body() updateData: Partial<Todo>
+  ): Promise<Todo | null> {
+    return this.todoService.updateTodoFields(id, updateData);
   }
 
   @Delete(":id")

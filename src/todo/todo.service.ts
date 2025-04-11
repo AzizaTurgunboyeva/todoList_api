@@ -39,6 +39,20 @@ export class TodoService {
       throw error;
     }
   }
+  async updateTodoFields(
+    id: string,
+    updateData: Partial<Todo>
+  ): Promise<Todo | null> {
+    try {
+      const updated = await this.todoModel.findByIdAndUpdate(id, updateData, {
+        new: true,
+      });
+      return updated;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
 
   async remove(id: string): Promise<Todo | null> {
     return this.todoModel.findByIdAndDelete(id).exec();
