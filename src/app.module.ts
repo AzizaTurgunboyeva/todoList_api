@@ -7,9 +7,7 @@ import { TodoModule } from "./todo/todo.module";
   imports: [
     ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }),
     MongooseModule.forRootAsync({
-      imports: [ConfigModule.forRoot({
-        isGlobal:true
-      })],
+      imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>("MONGO_URI"),
       }),
