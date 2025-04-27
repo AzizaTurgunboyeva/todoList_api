@@ -11,7 +11,7 @@ import { TodoModule } from "./todo/todo.module";
         isGlobal:true
       })],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>("MONGO_URL"),
+        uri: configService.get<string>("MONGO_URI"),
       }),
       inject: [ConfigService],
     }),
