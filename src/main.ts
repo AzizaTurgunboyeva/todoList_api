@@ -8,7 +8,7 @@ async function start() {
     const app = await NestFactory.create(AppModule);
 
     app.enableCors({
-      origin: "http://localhost:5173", // Match your Vite frontend origin
+      origin: true, // Match your Vite frontend origin
       methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
       credentials: true,
